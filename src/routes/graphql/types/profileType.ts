@@ -32,35 +32,32 @@ export const ProfileType = new GraphQLObjectType<Profile, Context>({
     })
 });
 
-// export const ProfileTypePATCH = new GraphQLInputObjectType({
-//     name: 'ProfileTypePATCH',
-//     fields: () => ({
-//         isMale: {
-//             type: new GraphQLNonNull(GraphQLBoolean)
-//         },
-//         yearOfBirth: {
-//             type: new GraphQLNonNull(GraphQLInt)
-//         },
-//         memberTypeId: {
-//             type: new GraphQLNonNull(MemberEnumTypeForId)
-//         },
-//     })
-// })
+export const Profile_change = new GraphQLInputObjectType({
+    name: 'ChangeProfileInput',
+    fields: () => ({
+        isMale: {
+            type: GraphQLBoolean
+        },
+        yearOfBirth: {
+            type: GraphQLInt
+        },
+    })
+})
 
-// export const ProfileTypePOST = new GraphQLInputObjectType({
-//     name: 'ProfileTypePOST',
-//     fields: () => ({
-//         isMale: {
-//             type: new GraphQLNonNull(GraphQLBoolean)
-//         },
-//         yearOfBirth: {
-//             type: new GraphQLNonNull(GraphQLInt)
-//         },
-//         userId: {
-//             type: new GraphQLNonNull(UUIDType)
-//         },
-//         memberTypeId: {
-//             type: new GraphQLNonNull(MemberEnumTypeForId)
-//         },
-//     })
-// })
+export const Profile_create = new GraphQLInputObjectType({
+    name: 'CreateProfileInput',
+    fields: () => ({
+        isMale: {
+            type: new GraphQLNonNull(GraphQLBoolean)
+        },
+        yearOfBirth: {
+            type: new GraphQLNonNull(GraphQLInt)
+        },
+        userId: {
+            type: new GraphQLNonNull(UUIDType)
+        },
+        memberTypeId: {
+            type: new GraphQLNonNull(MemberEnumTypeForId)
+        },
+    })
+})

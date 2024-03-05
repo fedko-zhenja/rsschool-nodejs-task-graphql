@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInputObjectTyp
 import { UUIDType } from './uuid.js';
 
 export const PostType = new GraphQLObjectType({
-    name: 'PostType',
+    name: 'Post',
     fields: () => ({
         id: {
             type: new GraphQLNonNull(UUIDType)
@@ -19,20 +19,20 @@ export const PostType = new GraphQLObjectType({
     })
 });
 
-export const PostTypePATCH = new GraphQLInputObjectType({
-    name: 'PostTypePATCH',
+export const Post_change = new GraphQLInputObjectType({
+    name: 'ChangePostInput',
     fields: () => ({
         title: {
-            type: new GraphQLNonNull(GraphQLString)
+            type: GraphQLString
         },
         content: {
-            type: new GraphQLNonNull(GraphQLString)
-        }
+            type: GraphQLString
+        },
     })
 })
 
-export const PostTypePOST = new GraphQLInputObjectType({
-    name: 'PostTypePOST',
+export const Post_create = new GraphQLInputObjectType({
+    name: 'CreatePostInput',
     fields: () => ({
         title: {
             type: new GraphQLNonNull(GraphQLString)

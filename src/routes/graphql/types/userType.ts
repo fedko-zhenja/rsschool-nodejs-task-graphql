@@ -1,6 +1,5 @@
-import { GraphQLList, GraphQLObjectType, GraphQLFloat, GraphQLNonNull, GraphQLInputObjectType, GraphQLString  } from 'graphql';
+import { GraphQLList, GraphQLObjectType, GraphQLFloat, GraphQLNonNull, GraphQLInputObjectType, GraphQLString, GraphQLInt  } from 'graphql';
 import { UUIDType } from './uuid.js';
-// import { MemberEnumTypeForId } from './memberType.js';
 import { ProfileType } from './profileType.js';
 import { PostType } from './postType.js';
 import { User } from "@prisma/client";
@@ -33,17 +32,6 @@ export const UserType: GraphQLObjectType = new GraphQLObjectType<User, Context>(
             },
         },
 
-        // userSubscribedTo: {
-        //     type: new GraphQLList(UserType),
-        //     resolve: async (parent, args, ctx) => {
-        //         const res = (
-        //             (await ctx.prisma.post.findMany({ where: { subscriberId: parent.id }, select: { author: true } })).map(({author}) => author);
-        //             return res
-        //         )
-                
-        //     },
-        // },
-
         userSubscribedTo: {
             type: new GraphQLList(UserType),
             resolve: async (parent, args, ctx) => {
@@ -64,38 +52,26 @@ export const UserType: GraphQLObjectType = new GraphQLObjectType<User, Context>(
     })
 });
 
-// export const SubscribersOnAuthorsType = new GraphQLObjectType({
-//     name: 'SubscribersOnAuthorsType',
-//     fields: () => ({
-//         subscriber: { 
-//             type:  UserType
-//         },
-//         author: { 
-//             type: UserType
-//         }
-//     })
-// });
+export const User_create = new GraphQLInputObjectType({
+    name: 'CreateUserInput',
+    fields: () => ({
+        name: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
+        balance: {
+            type: new GraphQLNonNull(GraphQLFloat)
+        }
+    })
+})
 
-// export const UserTypePATCH = new GraphQLInputObjectType({
-//     name: 'UserTypePATCH',
-//     fields: () => ({
-//         name: {
-//             type: new GraphQLNonNull(GraphQLString)
-//         },
-//         balance: {
-//             type: new GraphQLNonNull(GraphQLFloat)
-//         }
-//     })
-// })
-
-// export const UserTypePOST = new GraphQLInputObjectType({
-//     name: 'UserTypePOST',
-//     fields: () => ({
-//         name: {
-//             type: new GraphQLNonNull(GraphQLString)
-//         },
-//         balance: {
-//             type: new GraphQLNonNull(GraphQLFloat)
-//         }
-//     })
-// })
+export const User_change = new GraphQLInputObjectType({
+    name: 'ChangeUserInput',
+    fields: () => ({
+        name: {
+            type: GraphQLString
+        },
+        balance: {
+            type: GraphQLFloat
+        }
+    })
+})
